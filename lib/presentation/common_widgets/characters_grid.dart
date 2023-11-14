@@ -20,29 +20,35 @@ class CharactersGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage(image),
-          radius: 65,
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        Text(
-          status,
-          style: AppFonts.s10w500.copyWith(
-            color: status == 'Alive' ? AppColors.green : AppColors.red,
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          CircleAvatar(
+            backgroundImage: NetworkImage(image),
+            radius: 65,
           ),
-        ),
-        Text(
-          name,
-          style: AppFonts.s14w500.copyWith(
-            color: AppColors.white,
+          const SizedBox(
+            height: 18,
           ),
-        ),
-        Text('$species , $gender', style: AppFonts.s12w400.copyWith(color: AppColors.grey),),
-      ],
+          Text(
+            status,
+            style: AppFonts.s10w500.copyWith(
+              color: status == 'Alive' ? AppColors.green : AppColors.red,
+            ),
+          ),
+          Text(
+            name,
+            style: AppFonts.s14w500.copyWith(
+              color: AppColors.white,
+            ),
+          ),
+          Text(
+            '$species , $gender',
+            style: AppFonts.s12w400.copyWith(color: AppColors.grey),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocProvider(
           create: (context) => GetCharactersBloc(
-              repository:
-                  RepositoryProvider.of<GetCaractersRepository>(context)),
+            repository: RepositoryProvider.of<GetCaractersRepository>(context),
+          ),
           child: const CharactersListPage(),
         ),
       ),

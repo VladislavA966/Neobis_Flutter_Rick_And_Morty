@@ -7,7 +7,7 @@ import 'package:neobis_week_five_projekt/resources/resources.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
-    required this.onChanged, 
+    required this.onChanged,
   }) : super(key: key);
 
   final void Function(String) onChanged;
@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: onChanged, 
+      onChanged: onChanged,
       decoration: InputDecoration(
         suffixIconConstraints: const BoxConstraints(
           minHeight: 24,

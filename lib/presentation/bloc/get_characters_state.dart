@@ -18,3 +18,8 @@ final class GetCharactersError extends GetCharactersState {
 
   GetCharactersError({required this.errorText});
 }
+
+final class GetCharacterInfoSuccsess extends GetCharactersState {
+  final CharacterInfoModel model;
+  GetCharacterInfoSuccsess({required this.model});
+}

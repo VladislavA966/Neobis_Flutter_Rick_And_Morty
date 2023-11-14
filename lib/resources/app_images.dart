@@ -5,7 +5,7 @@ class AppImages {
 
   static const String chartOne = 'assets/chart_one.svg';
   static const String chartTwo = 'assets/chart_two.svg';
-  static const String errorOne = 'assets/error_one.svg';
+  static const String errorOne = 'assets/error_one.png';
   static const String errorTwo = 'assets/error_two.svg';
   static const String filterSort = 'assets/filter_sort.svg';
   static const String filterSortDisable =

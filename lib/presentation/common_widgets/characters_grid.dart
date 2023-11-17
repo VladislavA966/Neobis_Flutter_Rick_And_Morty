@@ -37,10 +37,12 @@ class CharactersGrid extends StatelessWidget {
               color: status == 'Alive' ? AppColors.green : AppColors.red,
             ),
           ),
-          Text(
-            name,
-            style: AppFonts.s14w500.copyWith(
-              color: AppColors.white,
+          Flexible(
+            child: Text(
+              name,
+              style: AppFonts.s14w500.copyWith(
+                color: AppColors.white,
+              ),
             ),
           ),
           Text(

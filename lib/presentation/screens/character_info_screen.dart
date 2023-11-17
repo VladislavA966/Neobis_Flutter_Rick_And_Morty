@@ -18,7 +18,7 @@ class CharacterInfoScreen extends StatefulWidget {
 class _CharacterInfoScreenState extends State<CharacterInfoScreen> {
   final bloc = GetCharactersBloc(
     repository: GetCaractersRepository(dio: DioSettings().dio),
-  );
+  ); //У меня где то теряется context, когда начинаю работать с bloc красный экран с ошибкой контекста. Думал, что такой способ поможет, но когда начинаю работать с BlocBuilder ошибка вернулась.
 
   @override
   void initState() {
@@ -96,7 +96,7 @@ class BackgroundCharacterImage extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.3,
       child: ColorFiltered(
         colorFilter: ColorFilter.mode(
-          Colors.grey.withOpacity(0.5),
+          Colors.grey.withOpacity(0.65),
           BlendMode.srcATop,
         ),
         child: Image.network(
@@ -224,24 +224,24 @@ class CharacterInfoRow extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Пол',
+                'Место рождения',
                 style:
                     AppFonts.s12w400.copyWith(color: AppColors.textFieldIcon),
               ),
               Text(
-                'Мужской',
+                'Земля С - 137',
                 style: AppFonts.s14w500.copyWith(color: AppColors.white),
               ),
               const SizedBox(
                 height: 24,
               ),
               Text(
-                'Пол',
+                'Местоположение',
                 style:
                     AppFonts.s12w400.copyWith(color: AppColors.textFieldIcon),
               ),
               Text(
-                'Мужской',
+                'Земля(Измерение подмены)',
                 style: AppFonts.s14w500.copyWith(color: AppColors.white),
               ),
             ],
@@ -250,12 +250,12 @@ class CharacterInfoRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Пол',
+                'Расса',
                 style:
                     AppFonts.s12w400.copyWith(color: AppColors.textFieldIcon),
               ),
               Text(
-                'Мужской',
+                'Человек',
                 style: AppFonts.s14w500.copyWith(color: AppColors.white),
               ),
             ],
@@ -277,7 +277,7 @@ class CustomCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: MediaQuery.of(context).size.height * 0.14,
+      left: MediaQuery.of(context).size.height * 0.15,
       top: MediaQuery.of(context).size.height * 0.20,
       child: const CircleAvatar(
         radius: 81,

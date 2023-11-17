@@ -5,6 +5,7 @@ import 'package:neobis_week_five_projekt/data/repositories/get_characters_reposi
 import 'package:neobis_week_five_projekt/presentation/bloc/get_characters_bloc.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/characters_list_page.dart';
+import 'package:neobis_week_five_projekt/presentation/screens/filters_screen.dart';
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldBgDark),
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.scaffoldBgDark,
+        unselectedWidgetColor: AppColors.textFieldIcon,
+      ),
       home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GetCharactersBloc(
             repository: RepositoryProvider.of<GetCaractersRepository>(context),
           ),
-          child: const CharactersListPage(),
+          child: const FiltersScreen(),
         ),
       ),
     );

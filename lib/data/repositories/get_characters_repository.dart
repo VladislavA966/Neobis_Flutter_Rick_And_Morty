@@ -8,9 +8,9 @@ class GetCaractersRepository {
   GetCaractersRepository({required this.dio});
 
   Future<CaractersModel> getCaracters(
-      {String? counterPage, String name = ''}) async {
+      {int counter = 1, String name = ''}) async {
     String url =
-        'https://rickandmortyapi.com/api/character?page=$counterPage&name=$name';
+        'https://rickandmortyapi.com/api/character?page=$counter&name=$name';
 
     final Response response = await dio.get(url);
     return CaractersModel.fromJson(response.data);
@@ -20,6 +20,4 @@ class GetCaractersRepository {
     final Response response = await dio.get(url);
     return CharacterInfoModel.fromJson(response.data);
   }
-
-  
 }

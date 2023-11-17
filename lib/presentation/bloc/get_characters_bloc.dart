@@ -18,10 +18,12 @@ class GetCharactersBloc extends Bloc<GetCharacters, GetCharactersState> {
           emit(
             GetCharactersLoading(),
           );
-          final model = await repository.getCaracters(name: event.name ?? '');
+          final model = await repository.getCaracters(
+              name: event.name ?? '', counter: event.counter ?? 1);
           emit(
             GetCharactersSuccses(model: model),
           );
+         
         } catch (e) {
           emit(
             GetCharactersError(

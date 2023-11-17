@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 import 'package:neobis_week_five_projekt/resources/app_fonst/app_fonts.dart';
@@ -33,26 +35,29 @@ class CharactersRow extends StatelessWidget {
             const SizedBox(
               width: 18,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  status,
-                  style: AppFonts.s10w500.copyWith(
-                    color: status == 'Alive' ? AppColors.green : AppColors.red,
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    status,
+                    style: AppFonts.s10w500.copyWith(
+                      color: status == 'Alive' ? AppColors.green : AppColors.red,
+                    ),
                   ),
-                ),
-                Text(
-                  name,
-                  style: AppFonts.s16w500.copyWith(
-                    color: AppColors.white,
+                  Text(
+                    name,
+                    
+                    style: AppFonts.s16w500.copyWith(
+                      color: AppColors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  '$species , $gender',
-                  style: AppFonts.s12w400.copyWith(color: AppColors.grey),
-                ),
-              ],
+                  Text(
+                    '$species , $gender',
+                    style: AppFonts.s12w400.copyWith(color: AppColors.grey),
+                  ),
+                ],
+              ),
             )
           ],
         ),

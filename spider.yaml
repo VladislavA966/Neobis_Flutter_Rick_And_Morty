@@ -30,9 +30,9 @@ use_references_list: false
 package: resources
 
 groups:
-  - path: assets/images
+  - path: assets/
     class_name: Images
     types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
-  - path: assets/images/svgs
+  - path: assets/
     class_name: AppImages
     types: [.svg ]

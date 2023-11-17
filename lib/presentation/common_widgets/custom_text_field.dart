@@ -29,8 +29,11 @@ class CustomTextField extends StatelessWidget {
         hintStyle: AppFonts.s16w400.copyWith(
           color: AppColors.textFieldIcon,
         ),
-        suffixIcon: SvgPicture.asset(
-          AppImages.filterSort,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SvgPicture.asset(
+            AppImages.filterSort,
+          ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(

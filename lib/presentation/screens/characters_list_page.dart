@@ -106,7 +106,7 @@ class _CharactersListPageState extends State<CharactersListPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                AppImages.errorOne,
+                Images.errorOne,
               ),
               const SizedBox(
                 height: 28,
@@ -136,7 +136,15 @@ class _CharactersListPageState extends State<CharactersListPage> {
         itemCount: state.model.results?.length ?? 0,
         itemBuilder: (context, index) {
           return CharactersGrid(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CharacterInfoScreen(
+                      url: state.model.results?[index].url ?? ''),
+                ),
+              );
+            },
             image: state.model.results?[index].image ?? '',
             name: state.model.results?[index].name ?? '',
             status: state.model.results?[index].status ?? '',

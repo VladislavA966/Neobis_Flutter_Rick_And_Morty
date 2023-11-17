@@ -20,4 +20,6 @@ class GetCaractersRepository {
     final Response response = await dio.get(url);
     return CharacterInfoModel.fromJson(response.data);
   }
+
+  
 }

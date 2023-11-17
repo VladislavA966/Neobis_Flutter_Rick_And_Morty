@@ -18,8 +18,9 @@ class CharacterInfoScreen extends StatefulWidget {
 class _CharacterInfoScreenState extends State<CharacterInfoScreen> {
   final bloc = GetCharactersBloc(
     repository: GetCaractersRepository(dio: DioSettings().dio),
-  ); //У меня где то теряется context, когда начинаю работать с bloc красный экран с ошибкой контекста. Думал, что такой способ поможет, но когда начинаю работать с BlocBuilder ошибка вернулась.
-
+  ); //У меня где то теряется context, когда начинаю работать с bloc красный экран с ошибкой контекста.
+  // Думал, что такой способ поможет, но когда начинаю работать с BlocBuilder ошибка вернулась.
+  //Отредактировано не до конца
   @override
   void initState() {
     bloc.add(

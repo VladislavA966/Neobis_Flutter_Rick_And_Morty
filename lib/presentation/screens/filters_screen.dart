@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 import 'package:neobis_week_five_projekt/resources/app_fonst/app_fonts.dart';
-
+//not refactored
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
 

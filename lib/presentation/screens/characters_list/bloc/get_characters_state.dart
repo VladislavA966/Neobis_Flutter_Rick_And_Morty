@@ -8,7 +8,7 @@ final class GetCharactersInitial extends GetCharactersState {}
 final class GetCharactersLoading extends GetCharactersState {}
 
 final class GetCharactersSuccses extends GetCharactersState {
-  final CaractersModel model;
+  final ApiCharacters model;
 
   GetCharactersSuccses({required this.model});
 }
@@ -20,6 +20,6 @@ final class GetCharactersError extends GetCharactersState {
 }
 
 final class GetCharacterInfoSuccsess extends GetCharactersState {
-  final CharacterInfoModel model;
+  final ApiCharactersDetail model;
   GetCharacterInfoSuccsess({required this.model});
 }

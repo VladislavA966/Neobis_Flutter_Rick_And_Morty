@@ -1,15 +1,15 @@
-class CaractersModel {
+class ApiCharacters {
   Info? info;
   List<Results>? results;
 
-  CaractersModel({this.info, this.results});
+  ApiCharacters({this.info, this.results});
 
-  CaractersModel.fromJson(Map<String, dynamic> json) {
-    info = json['info'] != null ? Info.fromJson(json['info']) : null;
+  ApiCharacters.fromApi(Map<String, dynamic> json) {
+    info = json['info'] != null ? Info.fromApi(json['info']) : null;
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results!.add(Results.fromApi(v));
       });
     }
   }
@@ -34,7 +34,7 @@ class Info {
 
   Info({this.count, this.pages, this.next, this.prev});
 
-  Info.fromJson(Map<String, dynamic> json) {
+  Info.fromApi(Map<String, dynamic> json) {
     count = json['count'];
     pages = json['pages'];
     next = json['next'];
@@ -79,17 +79,16 @@ class Results {
       this.url,
       this.created});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  Results.fromApi(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     status = json['status'];
     species = json['species'];
     type = json['type'];
     gender = json['gender'];
-    origin =
-        json['origin'] != null ? Origin.fromJson(json['origin']) : null;
+    origin = json['origin'] != null ? Origin.fromApi(json['origin']) : null;
     location =
-        json['location'] != null ? Origin.fromJson(json['location']) : null;
+        json['location'] != null ? Origin.fromApi(json['location']) : null;
     image = json['image'];
     episode = json['episode'].cast<String>();
     url = json['url'];
@@ -124,7 +123,7 @@ class Origin {
 
   Origin({this.name, this.url});
 
-  Origin.fromJson(Map<String, dynamic> json) {
+  Origin.fromApi(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }

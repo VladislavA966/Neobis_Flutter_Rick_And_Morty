@@ -47,6 +47,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           color: AppColors.white,
                         ),
                       ),
+                   
                     ],
                   ),
                 ),

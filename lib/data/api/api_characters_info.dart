@@ -1,4 +1,4 @@
-class CharacterInfoModel {
+class ApiCharactersDetail {
   int? id;
   String? name;
   String? status;
@@ -12,7 +12,7 @@ class CharacterInfoModel {
   String? url;
   String? created;
 
-  CharacterInfoModel(
+  ApiCharactersDetail(
       {this.id,
       this.name,
       this.status,
@@ -26,7 +26,7 @@ class CharacterInfoModel {
       this.url,
       this.created});
 
-  CharacterInfoModel.fromJson(Map<String, dynamic> json) {
+  ApiCharactersDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     status = json['status'];
@@ -34,9 +34,9 @@ class CharacterInfoModel {
     type = json['type'];
     gender = json['gender'];
     origin =
-        json['origin'] != null ? Origin.fromJson(json['origin']) : null;
+        json['origin'] != null ? new Origin.fromJson(json['origin']) : null;
     location =
-        json['location'] != null ? Origin.fromJson(json['location']) : null;
+        json['location'] != null ? new Origin.fromJson(json['location']) : null;
     image = json['image'];
     episode = json['episode'].cast<String>();
     url = json['url'];

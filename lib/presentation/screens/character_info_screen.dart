@@ -1,93 +1,117 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:neobis_week_five_projekt/data/dio_settings/dio_settings.dart';
-import 'package:neobis_week_five_projekt/data/repositories/get_characters_repository.dart';
-import 'package:neobis_week_five_projekt/presentation/bloc/get_characters_bloc.dart';
+
+import 'package:neobis_week_five_projekt/presentation/screens/characters_list/bloc/get_characters_bloc.dart';
+
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 import 'package:neobis_week_five_projekt/resources/app_fonst/app_fonts.dart';
 
 class CharacterInfoScreen extends StatefulWidget {
   final String url;
-
-  const CharacterInfoScreen({Key? key, required this.url}) : super(key: key);
+  const CharacterInfoScreen({
+    Key? key,
+    required this.url,
+  }) : super(key: key);
 
   @override
   State<CharacterInfoScreen> createState() => _CharacterInfoScreenState();
 }
 
 class _CharacterInfoScreenState extends State<CharacterInfoScreen> {
-  final bloc = GetCharactersBloc(
-    repository: GetCaractersRepository(dio: DioSettings().dio),
-  ); //У меня где то теряется context, когда начинаю работать с bloc красный экран с ошибкой контекста.
-  // Думал, что такой способ поможет, но когда начинаю работать с BlocBuilder ошибка вернулась.
-  //Отредактировано не до конца
   @override
   void initState() {
-    bloc.add(
+    BlocProvider.of<GetCharactersBloc>(context).add(
       GetCharacterInfoEvent(url: widget.url),
     );
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              const BackgroundCharacterImage(),
-              const SizedBox(
-                height: 90,
-              ),
-              const NameStatusColumn(),
-              Text(
-                'Живой',
-                style: AppFonts.s10w500.copyWith(
-                  color: AppColors.green,
+    return BlocBuilder<GetCharactersBloc, GetCharactersState>(
+      builder: (context, state) {
+        if (state is GetCharacterInfoSuccsess) {
+          return Scaffold(
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    BackgroundCharacterImage(
+                      image: state.model.image ?? '',
+                    ),
+                    const SizedBox(
+                      height: 90,
+                    ),
+                    NameStatusColumn(
+                        name: state.model.name ?? '',
+                        status: state.model.status ?? ''),
+                    CharacterInfoRow(
+                        gender: state.model.gender ?? ' ',
+                        birthDayPlace: state.model.origin!.name ?? '',
+                        location: state.model.location!.name ?? '',
+                        type: state.model.species ?? ''),
+                    SizedBox(
+                      height: 36,
+                    ),
+                    LineContainer(),
+                    SizedBox(
+                      height: 26,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: EpisodesTitleRow(),
+                    ),
+                  ],
                 ),
-              ),
-              const CharacterInfoRow(),
-              const SizedBox(
-                height: 36,
-              ),
-              const LineContainer(),
-              const SizedBox(
-                height: 26,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(16),
-                child: EpisodesTitleRow(),
-              ),
-            ],
+                CustomCircleAvatar(
+                  image: state.model.image ?? '',
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox();
+      },
+    );
+  }
+}
+
+class NameStatusColumn extends StatelessWidget {
+  final String name;
+  final String status;
+
+  const NameStatusColumn({
+    super.key,
+    required this.name,
+    required this.status,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        children: [
+          Text(
+            name,
+            style: AppFonts.s34w400.copyWith(color: AppColors.white),
           ),
-          const CustomCircleAvatar(),
+          Text(
+            status,
+            style: AppFonts.s10w500.copyWith(
+              color: AppColors.green,
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-class NameStatusColumn extends StatelessWidget {
-  const NameStatusColumn({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Text(
-        'Рик Санчез',
-        style: AppFonts.s34w400.copyWith(color: AppColors.white),
-      ),
-    );
-  }
-}
-
 class BackgroundCharacterImage extends StatelessWidget {
+  final String image;
   const BackgroundCharacterImage({
     super.key,
+    required this.image,
   });
 
   @override
@@ -101,7 +125,7 @@ class BackgroundCharacterImage extends StatelessWidget {
           BlendMode.srcATop,
         ),
         child: Image.network(
-          'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+          image,
           fit: BoxFit.cover,
           width: double.infinity,
         ),
@@ -197,8 +221,16 @@ class LineContainer extends StatelessWidget {
 }
 
 class CharacterInfoRow extends StatelessWidget {
+  final String gender;
+  final String birthDayPlace;
+  final String location;
+  final String type;
   const CharacterInfoRow({
     super.key,
+    required this.gender,
+    required this.birthDayPlace,
+    required this.location,
+    required this.type,
   });
 
   @override
@@ -271,8 +303,10 @@ class CharacterInfoRow extends StatelessWidget {
 }
 
 class CustomCircleAvatar extends StatelessWidget {
+  final String image;
   const CustomCircleAvatar({
     super.key,
+    required this.image,
   });
 
   @override
@@ -280,12 +314,11 @@ class CustomCircleAvatar extends StatelessWidget {
     return Positioned(
       left: MediaQuery.of(context).size.height * 0.15,
       top: MediaQuery.of(context).size.height * 0.20,
-      child: const CircleAvatar(
+      child: CircleAvatar(
         radius: 81,
         backgroundColor: AppColors.darkBlue,
         child: CircleAvatar(
-          backgroundImage: NetworkImage(
-              'https://rickandmortyapi.com/api/character/avatar/1.jpeg'),
+          backgroundImage: NetworkImage(image),
           radius: 73,
         ),
       ),

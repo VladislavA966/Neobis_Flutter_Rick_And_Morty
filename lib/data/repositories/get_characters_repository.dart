@@ -10,9 +10,9 @@ class GetCaractersRepository implements GetCharacters {
   GetCaractersRepository({required this.dio});
 
   @override
-  Future getMoreCharacters(int pageCounter) async {
+  Future getMoreCharacters(String counter) async {
     String url =
-        'https://rickandmortyapi.com/api/character?page=$pageCounter&name=';
+        'https://rickandmortyapi.com/api/character?page=$counter&name=';
     final response = await dio.get(url);
     return ApiCharacters.fromApi(response.data);
   }

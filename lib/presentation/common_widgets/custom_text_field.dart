@@ -7,10 +7,11 @@ import 'package:neobis_week_five_projekt/resources/resources.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
-    required this.onChanged,
+    required this.onChanged, required this.onTap,
   }) : super(key: key);
 
   final void Function(String) onChanged;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,11 @@ class CustomTextField extends StatelessWidget {
         ),
         suffixIcon: Padding(
           padding: const EdgeInsets.all(16),
-          child: SvgPicture.asset(
-            AppImages.filterSort,
+          child: InkWell(
+            onTap: onTap,
+            child: SvgPicture.asset(
+              AppImages.filterSort,
+            ),
           ),
         ),
         border: OutlineInputBorder(

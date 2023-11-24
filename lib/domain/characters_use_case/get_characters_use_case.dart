@@ -10,7 +10,7 @@ class GetCharactersUseCase {
     return await charactersRepository.getCharacters(name);
   }
 
-  Future<CharacterList> getMoreCharacters(int pageCounter) async {
-    return await charactersRepository.getMoreCharacters(pageCounter);
+  Future<CharacterList> getMoreCharacters(String url) async {
+    return await charactersRepository.getMoreCharacters(url);
   }
 }

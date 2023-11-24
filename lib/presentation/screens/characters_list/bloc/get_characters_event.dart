@@ -11,10 +11,10 @@ class GetCharactersEvent extends GetCharacters {
   });
 }
 
-class GetMoreCharacters extends GetCharacters {
+class GetMoreCharactersEvent extends GetCharacters {
   final String counter;
 
-  GetMoreCharacters(this.counter);
+  GetMoreCharactersEvent({required this.counter});
 }
 
 class GetCharacterInfoEvent extends GetCharacters {

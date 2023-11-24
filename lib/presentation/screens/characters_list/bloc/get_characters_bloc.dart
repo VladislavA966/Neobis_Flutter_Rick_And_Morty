@@ -10,8 +10,9 @@ part 'get_characters_state.dart';
 class GetCharactersBloc extends Bloc<GetCharacters, GetCharactersState> {
   GetCaractersRepository repository;
 
-  GetCharactersBloc({required this.repository})
-      : super(GetCharactersInitial()) {
+  GetCharactersBloc({
+    required this.repository,
+  }) : super(GetCharactersInitial()) {
     on<GetCharactersEvent>(
       (event, emit) async {
         try {
@@ -31,13 +32,10 @@ class GetCharactersBloc extends Bloc<GetCharacters, GetCharactersState> {
         }
       },
     );
-    on<GetMoreCharacters>(
+    on<GetMoreCharactersEvent>(
       (event, emit) async {
         try {
-          emit(
-            GetCharactersLoading(),
-          );
-          final model = await repository.getCharacters(event.counter ?? '');
+          final model = await repository.getMoreCharacters(event.counter);
           emit(
             GetCharactersSuccses(model: model),
           );

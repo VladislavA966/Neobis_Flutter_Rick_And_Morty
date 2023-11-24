@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 import 'package:neobis_week_five_projekt/resources/app_fonst/app_fonts.dart';
+
 //not refactored
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
@@ -10,9 +11,13 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  bool? checkboxValue1 = true;
-  bool checkboxValue2 = true;
-  bool checkboxValue3 = true;
+  bool? aliveCheck = false;
+  bool? deadCheck = false;
+  bool? unknownCheck = false;
+  bool? maleChek = false;
+  bool? femaleCheck = false;
+  bool? unknownGender = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +52,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           color: AppColors.white,
                         ),
                       ),
-                   
                     ],
                   ),
                 ),
@@ -87,47 +91,160 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   color: AppColors.grey,
                 ),
               ),
-              SizedBox(height: 10,),
-              checkBox(title: 'Живой'),
-              checkBox(title: 'Мертвый'),
-              checkBox(title: 'Неизвестно'),
-              const SizedBox(height: 36,),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: aliveCheck,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        aliveCheck = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Живой',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: deadCheck,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        deadCheck = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Мертвый',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: unknownCheck,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        unknownCheck = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Неизвестно',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 36,
+              ),
               const LineContainer(),
-              const SizedBox(height: 36,),
-              Text('ПОЛ', style: AppFonts.s10w500.copyWith(color: AppColors.textFieldIcon),),
-              SizedBox(height: 10,),
-              checkBox(title: 'Мужской'),
-              checkBox(title: 'Женский'),
-              checkBox(title: 'Бесполый'),
+              const SizedBox(
+                height: 36,
+              ),
+              Text(
+                'ПОЛ',
+                style:
+                    AppFonts.s10w500.copyWith(color: AppColors.textFieldIcon),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: maleChek,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        maleChek = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Мужской',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: femaleCheck,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        femaleCheck = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Женский',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    activeColor: AppColors.lightBlue,
+                    value: unknownGender,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        unknownGender = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Бесполый',
+                    style: AppFonts.s16w400.copyWith(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Row checkBox({required String title}) {
-    return Row(
-      children: [
-        Checkbox(
-          activeColor: AppColors.lightBlue,
-          value: checkboxValue1,
-          onChanged: (bool? value) {
-            setState(() {
-              checkboxValue1 = value;
-            });
-          },
-        ),
-        const SizedBox(
-          width: 16,
-        ),
-        Text(
-          title,
-          style: AppFonts.s16w400.copyWith(
-            color: AppColors.white,
-          ),
-        ),
-      ],
     );
   }
 }

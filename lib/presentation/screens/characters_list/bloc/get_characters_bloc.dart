@@ -13,57 +13,64 @@ class GetCharactersBloc extends Bloc<GetCharacters, GetCharactersState> {
   GetCharactersBloc({
     required this.repository,
   }) : super(GetCharactersInitial()) {
-    on<GetCharactersEvent>(
-      (event, emit) async {
-        try {
-          emit(
-            GetCharactersLoading(),
-          );
-          final model = await repository.getCharacters(event.name ?? '');
-          emit(
-            GetCharactersSuccses(model: model),
-          );
-        } catch (e) {
-          emit(
-            GetCharactersError(
-              errorText: e.toString(),
-            ),
-          );
-        }
-      },
-    );
-    on<GetMoreCharactersEvent>(
-      (event, emit) async {
-        try {
-          final model = await repository.getMoreCharacters(event.counter);
-          emit(
-            GetCharactersSuccses(model: model),
-          );
-        } catch (e) {
-          emit(
-            GetCharactersError(
-              errorText: e.toString(),
-            ),
-          );
-        }
-      },
-    );
-    on<GetCharacterInfoEvent>(
-      (event, emit) async {
-        try {
-          emit(GetCharactersLoading());
-          final model = await repository.getCharactersInfo(event.url);
-          emit(
-            GetCharacterInfoSuccsess(model: model),
-          );
-        } catch (e) {
-          emit(
-            GetCharactersError(
-              errorText: e.toString(),
-            ),
-          );
-        }
-      },
-    );
+    _setupHandlers();
+  }
+
+  void _setupHandlers() {
+    on<GetMoreCharactersEvent>(_onGetMoreCharactersEvent);
+    on<GetCharacterInfoEvent>(_onGetCharacterInfoEvent);
+    on<GetCharactersEvent>(_onGetCharactersEvent);
+  }
+
+  void _onGetMoreCharactersEvent(
+      GetMoreCharactersEvent event, Emitter<GetCharactersState> emit) async {
+    try {
+      final model = await repository.getMoreCharacters(event.counter);
+      emit(
+        GetCharactersSuccses(model: model),
+      );
+    } catch (e) {
+      emit(
+        GetCharactersError(
+          errorText: e.toString(),
+        ),
+      );
+    }
+  }
+
+  void _onGetCharactersEvent(
+      GetCharactersEvent event, Emitter<GetCharactersState> emit) async {
+    try {
+      emit(
+        GetCharactersLoading(),
+      );
+      final model = await repository.getCharacters(event.name ?? '');
+      emit(
+        GetCharactersSuccses(model: model),
+      );
+    } catch (e) {
+      emit(
+        GetCharactersError(
+          errorText: e.toString(),
+        ),
+      );
+    }
+  }
+
+  void _onGetCharacterInfoEvent(
+      GetCharacterInfoEvent event, Emitter<GetCharactersState> emit) async {
+    try {
+      emit(GetCharactersLoading());
+      final model = await repository.getCharactersInfo(event.url);
+      emit(
+        GetCharacterInfoSuccsess(model: model),
+      );
+    } catch (e) {
+      emit(
+        GetCharactersError(
+          errorText: e.toString(),
+        ),
+      );
+    }
   }
 }

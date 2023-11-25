@@ -60,16 +60,26 @@ class _CharactersListPageState extends State<CharactersListPage> {
   }
 
   Widget _buildSearchField() {
-    return CustomTextField(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const FiltersScreen()));
+    return BlocListener<GetCharactersBloc, GetCharactersState>(
+      listener: (context, state) {
+        if (state is GetCharactersSuccses) {
+          characters.clear();
+          characters.addAll(
+            state.model.results ?? [],
+          );
+        }
       },
-      onChanged: (value) {
-        BlocProvider.of<GetCharactersBloc>(context).add(
-          GetCharactersEvent(name: value),
-        );
-      },
+      child: CustomTextField(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FiltersScreen()));
+        },
+        onChanged: (value) {
+          BlocProvider.of<GetCharactersBloc>(context).add(
+            GetCharactersEvent(name: value),
+          );
+        },
+      ),
     );
   }
 
@@ -160,9 +170,7 @@ class _CharactersListPageState extends State<CharactersListPage> {
           return CharactersGrid(
             onTap: () {
               BlocProvider.of<GetCharactersBloc>(context).add(
-                GetCharacterInfoEvent(
-                  url: state.model.results?[index].url ?? '',
-                ),
+                GetCharacterInfoEvent(url: characters[index].url ?? ''),
               );
               Navigator.push(
                 context,

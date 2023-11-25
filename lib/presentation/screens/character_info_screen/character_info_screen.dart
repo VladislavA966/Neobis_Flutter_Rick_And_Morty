@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen/widgets/bg_image.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen/widgets/characters_widget.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen/widgets/circle_avatar.dart';
+import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen/widgets/line_container.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/character_info_screen/widgets/name_status_column.dart';
 import 'package:neobis_week_five_projekt/presentation/screens/characters_list/bloc/get_characters_bloc.dart';
 
-import 'package:neobis_week_five_projekt/presentation/screens/filters_screen.dart';
+import 'package:neobis_week_five_projekt/presentation/screens/filters_screen/filters_screen.dart';
 
 import 'package:neobis_week_five_projekt/resources/app_colors/app_colors.dart';
 import 'package:neobis_week_five_projekt/resources/app_fonst/app_fonts.dart';
